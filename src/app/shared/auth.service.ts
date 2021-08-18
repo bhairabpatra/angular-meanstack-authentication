@@ -4,13 +4,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  endpoint: string = 'http://localhost:4000/api';
+  endpoint: string = 'http://localhost:4500/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   currentUser = {};
 
@@ -57,6 +58,21 @@ export class AuthService {
     }
   }
 
+
+  //getUser
+
+  getUser(): Observable<any> {
+    let api = `${this.endpoint}`;
+    return this.http.get(api, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.handleError)
+    )
+  }
+
+
+
   // User profile
   getUserProfile(id): Observable<any> {
     let api = `${this.endpoint}/user-profile/${id}`;
@@ -68,7 +84,20 @@ export class AuthService {
     )
   }
 
-  // Error 
+  getData(): Observable<any> {
+
+    return  this.http.get('https://jsonplaceholder.typicode.com/users');
+
+  }
+
+  getProduct():Observable<any>{
+
+    return  this.http.get('https://jsonplaceholder.typicode.com/users');
+  }
+
+
+
+  // Error
   handleError(error: HttpErrorResponse) {
     let msg = '';
     if (error.error instanceof ErrorEvent) {

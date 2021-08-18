@@ -1,0 +1,52 @@
+
+<app-loader></app-loader>
+<div class="py-5 w-25 mx-auto" style="margin-top: 100px;">
+  <input type="search"
+       class="form-control"
+       placeholder="Please enter search term"
+       [formControl]="searchField">
+<hr/>
+<ul>
+  <li *ngFor="let search of searches">{{ search }}</li>
+</ul>
+</div>
+
+
+<div class="mt-5"></div>
+ <div class="container mt-5">
+  <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>
+  <table class="table table-bordered mt-5">
+    <thead>
+      <tr>
+        <th>Slno</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>user name</th>
+        <th>Website</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let users of Userall ; let i = index ; trackBy: trackByMethod">
+        <td>{{i+ 1}}</td>
+        <td>{{users.name}}</td>
+        <td>{{users.phone}}</td>
+        <td>{{users.username}}</td>
+        <td>{{users.website}}</td>
+        <td>
+                 {{users.address.city}} <br>
+                 {{users.address.street}}<br>
+                 {{users.address.suite}}
+                 {{users.address.zipcode}
+
+        </td>
+        <td><a routerLink='/'></a><button class="btn btn-sm btn-primary">View</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+
